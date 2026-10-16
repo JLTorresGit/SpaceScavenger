@@ -1,0 +1,374 @@
+{
+  "_readme": "Single tuning file for Space Scavenger. Every limit, price, cost, rate and spawn chance lives here. Ranges are [min, max]. Colors are [r, g, b] in 0..1. Edit, save and restart the game (or press F6 in game to hot-reload).",
+  "version": 1,
+
+  "world": {
+    "chunk_size": 4000,
+    "load_radius_chunks": 2,
+    "unload_radius_chunks": 3,
+    "system_cell_size": 50000,
+    "system_chance": 0.6,
+    "system_jitter": 0.15,
+    "system_load_margin": 9000,
+    "system_unload_margin": 14000,
+    "origin_shift_threshold": 20000,
+    "max_spawns_per_frame": 60,
+    "transient_unload_distance": 16000,
+    "start_safe_radius": 1400,
+    "home_system": { "center": [14000, 6000], "star_class": "G", "planets": 3 },
+    "home_station": [2600, 1800],
+    "home_derelict": [900, -700],
+    "biome": {
+      "noise_frequency": 0.06,
+      "core_threshold": 0.25,
+      "rim_threshold": -0.25,
+      "density": { "core": 1.6, "normal": 1.0, "rim": 0.45 }
+    },
+    "richness_per_100k": 0.25,
+    "richness_max": 3.0,
+    "spawn": {
+      "asteroid_field_chance": 0.22,
+      "asteroids_per_field": [8, 20],
+      "asteroid_field_radius": [600, 1400],
+      "derelict_chance": 0.35,
+      "derelicts_per_chunk": [1, 2],
+      "derelict_weights": { "satellite": 0.5, "vessel": 0.38, "station_wreck": 0.12 },
+      "scrap_cluster_chance": 0.3,
+      "scrap_per_cluster": [3, 7],
+      "nebula_chance": 0.04,
+      "ion_storm_chance": 0.03,
+      "black_hole_chance": 0.004,
+      "comet_chance": 0.04,
+      "station_chance": 0.025,
+      "wormhole_chance": 0.006,
+      "signal_chance": 0.02,
+      "ghost_ship_chance": 0.006,
+      "rescue_chance": 0.01
+    },
+    "star_system": {
+      "planets": [1, 6],
+      "planet_orbit_offset": 1200,
+      "planet_orbit_gap": [1400, 2400],
+      "moons": [0, 3],
+      "moon_orbit_factor": [2.2, 4.5],
+      "orbit_debris": [3, 9],
+      "orbit_debris_band": [1.4, 2.4],
+      "orbit_debris_weights": { "derelict": 0.4, "scrap": 0.45, "asteroid": 0.15 },
+      "station_chance": 0.4
+    }
+  },
+
+  "bodies": {
+    "star_types": {
+      "M": { "radius": [240, 340], "color": [1.0, 0.42, 0.3], "heat_factor": 2.6, "surface_gravity": 120, "temperature": 3200, "weight": 0.35 },
+      "K": { "radius": [300, 420], "color": [1.0, 0.7, 0.4], "heat_factor": 2.9, "surface_gravity": 140, "temperature": 4500, "weight": 0.25 },
+      "G": { "radius": [360, 480], "color": [1.0, 0.93, 0.6], "heat_factor": 3.1, "surface_gravity": 160, "temperature": 5800, "weight": 0.2 },
+      "F": { "radius": [420, 540], "color": [1.0, 1.0, 0.85], "heat_factor": 3.3, "surface_gravity": 180, "temperature": 6800, "weight": 0.1 },
+      "A": { "radius": [480, 620], "color": [0.85, 0.9, 1.0], "heat_factor": 3.6, "surface_gravity": 200, "temperature": 9000, "weight": 0.06 },
+      "B": { "radius": [560, 720], "color": [0.65, 0.75, 1.0], "heat_factor": 4.0, "surface_gravity": 230, "temperature": 20000, "weight": 0.03 },
+      "O": { "radius": [650, 850], "color": [0.55, 0.6, 1.0], "heat_factor": 4.5, "surface_gravity": 260, "temperature": 35000, "weight": 0.01 }
+    },
+    "star_influence_factor": 9.0,
+    "planet_types": {
+      "rocky":     { "radius": [90, 160],  "color": [0.6, 0.5, 0.42],  "surface_gravity": 60,  "weight": 0.3 },
+      "desert":    { "radius": [90, 150],  "color": [0.85, 0.68, 0.4], "surface_gravity": 55,  "weight": 0.15 },
+      "lava":      { "radius": [90, 150],  "color": [0.9, 0.35, 0.15], "surface_gravity": 65,  "weight": 0.1 },
+      "ocean":     { "radius": [110, 180], "color": [0.2, 0.45, 0.85], "surface_gravity": 60,  "weight": 0.12 },
+      "ice":       { "radius": [100, 170], "color": [0.75, 0.9, 1.0],  "surface_gravity": 50,  "weight": 0.13 },
+      "gas_giant": { "radius": [220, 340], "color": [0.85, 0.7, 0.5],  "surface_gravity": 110, "weight": 0.2, "ring_chance": 0.5 }
+    },
+    "planet_influence_factor": 7.0,
+    "moon": { "radius": [30, 60], "surface_gravity": 25, "influence_factor": 5.0, "colors": [[0.6, 0.6, 0.62], [0.7, 0.66, 0.6], [0.55, 0.58, 0.65]] }
+  },
+
+  "heat": {
+    "max_damage_per_sec": 45,
+    "scoop_radius_factor": 1.5,
+    "flare_interval": [40, 90],
+    "flare_duration": 6,
+    "flare_warning": 4,
+    "flare_heat_multiplier": 3.0
+  },
+
+  "hazards": {
+    "nebula": { "radius": [1500, 3500], "radar_multiplier": 0.35, "shield_regen_multiplier": 2.5 },
+    "ion_storm": { "radius": [800, 1800], "energy_drain_per_sec": 4.0, "drift_speed": [15, 45] },
+    "black_hole": { "horizon": 140, "influence": 3500, "surface_gravity": 1800, "damage_per_sec": 80, "damage_radius_factor": 1.5 },
+    "comet": { "radius": [22, 36], "speed": [60, 140] }
+  },
+
+  "anomalies": {
+    "wormhole": { "radius": 90, "jump_distance": [60000, 150000] },
+    "signal": { "radius": 40, "credits": [100, 400], "loot": "signal_cache" },
+    "rescue": { "radius": 30, "time_limit": 120, "credits": 450, "loot": "rescue_reward" }
+  },
+
+  "asteroids": {
+    "radius": [20, 90],
+    "hp_per_radius": 2.0,
+    "split_min_radius": 45,
+    "drift_speed": [0, 20],
+    "spin": [-0.6, 0.6],
+    "ore_weights": { "iron": 0.6, "titanium": 0.3, "rare": 0.1 },
+    "colors": { "iron": [0.55, 0.5, 0.47], "titanium": [0.62, 0.68, 0.76], "rare": [0.58, 0.42, 0.7], "ice": [0.78, 0.92, 1.0] }
+  },
+
+  "derelicts": {
+    "satellite":     { "radius": [22, 36],   "hp": 50,  "loot": "derelict_satellite" },
+    "vessel":        { "radius": [50, 90],   "hp": 150, "loot": "derelict_vessel" },
+    "station_wreck": { "radius": [100, 160], "hp": 360, "loot": "derelict_station_wreck" },
+    "ghost_ship":    { "radius": [70, 110],  "hp": 260, "loot": "derelict_ghost_ship" }
+  },
+
+  "ship": {
+    "radius": 18,
+    "thrust": 260,
+    "retro_factor": 0.6,
+    "rcs_thrust": 70,
+    "rotation_speed": 3.4,
+    "max_speed": 1100,
+    "warp_max_speed": 6000,
+    "warp_thrust_multiplier": 5.0,
+    "overspeed_decay": 0.8,
+    "fuel_capacity": 100,
+    "fuel_burn_per_sec": 0.9,
+    "warp_fuel_burn_per_sec": 4.0,
+    "rcs_energy_per_sec": 0.3,
+    "ion_cost_factor": 0.8,
+    "energy_capacity": 100,
+    "life_support_drain": 0.12,
+    "sensor_drain": 0.08,
+    "life_support_failure_damage": 0.6,
+    "shield_max": 60,
+    "shield_regen_per_sec": 5,
+    "shield_regen_energy_per_point": 0.3,
+    "shield_regen_delay": 3.0,
+    "hull_max": 100,
+    "hull_regen_per_sec": 0,
+    "cargo_max_weight": 250,
+    "cargo_max_volume": 160,
+    "tractor_range": 230,
+    "tractor_strength": 700,
+    "tractor_energy_per_sec": 1.5,
+    "proximity_range": 60,
+    "collect_radius": 34,
+    "laser_range": 650,
+    "laser_dps": 28,
+    "laser_energy_per_sec": 3.0,
+    "radar_range": 7000,
+    "scan_range": 1000,
+    "scan_energy": 8,
+    "scan_time": 1.5,
+    "heat_resistance": 0,
+    "scoop_rate": 0,
+    "converter_rate": 0,
+    "converter_ratio": 2.0,
+    "module_slots": 3,
+    "drone_count": 0,
+    "quick_travel_max_distance": 60000,
+    "quick_travel_fuel_per_1000": 0.5,
+    "quick_travel_energy": 10,
+    "collision_safe_speed": 70,
+    "collision_damage_factor": 0.12,
+    "collision_max_damage": 70,
+    "collision_restitution": 0.4,
+    "gravity_assist_efficiency": 0,
+    "salvage_yield": 1.0,
+    "dock_range": 260,
+    "dock_max_speed": 120,
+    "autopilot_arrive_margin": 180
+  },
+
+  "drones": { "speed": 420, "range": 900, "energy_per_sec": 0.5, "duration": 30 },
+
+  "warnings": {
+    "fuel_low": 0.25,
+    "energy_low": 0.2,
+    "hull_low": 0.35,
+    "critical": 0.1,
+    "suggest_kinds": {
+      "fuel":   ["station", "derelict", "comet"],
+      "energy": ["star", "station", "derelict"],
+      "hull":   ["station", "derelict", "field"]
+    }
+  },
+
+  "discovery": {
+    "range": { "star": 5000, "planet": 1800, "moon": 1200, "station": 1500, "nebula": 600, "black_hole": 2500, "wormhole": 1500, "field": 900, "ghost_ship": 1200, "signal": 1200, "rescue_pod": 2000, "default": 1000 },
+    "data_value": { "star": 60, "planet": 30, "moon": 15, "station": 10, "nebula": 25, "black_hole": 120, "wormhole": 80, "field": 8, "ghost_ship": 40, "derelict": 10, "asteroid": 2, "comet": 10, "signal": 20, "rescue_pod": 20, "ion_storm": 15 },
+    "discovery_data_fraction": 0.5
+  },
+
+  "items": {
+    "iron":           { "name": "Iron Ore",       "weight": 2.0, "volume": 1.0, "price": 4,   "size": "small", "color": [0.62, 0.6, 0.58] },
+    "titanium":       { "name": "Titanium Ore",   "weight": 1.5, "volume": 1.0, "price": 9,   "size": "small", "color": [0.75, 0.82, 0.92] },
+    "rare_ore":       { "name": "Rare Ore",       "weight": 2.5, "volume": 0.8, "price": 25,  "size": "small", "color": [0.8, 0.45, 1.0] },
+    "ice":            { "name": "Ice",            "weight": 1.0, "volume": 1.5, "price": 3,   "size": "small", "color": [0.7, 0.95, 1.0] },
+    "scrap_alloy":    { "name": "Scrap Alloy",    "weight": 1.5, "volume": 1.2, "price": 5,   "size": "small", "color": [0.72, 0.56, 0.4], "use": { "restore": "hull", "amount": 5 } },
+    "electronics":    { "name": "Electronics",    "weight": 0.5, "volume": 0.6, "price": 14,  "size": "small", "color": [0.35, 0.9, 0.5] },
+    "fuel_cell":      { "name": "Fuel Cell",      "weight": 1.0, "volume": 1.0, "price": 18,  "size": "large", "color": [1.0, 0.6, 0.15], "use": { "restore": "fuel", "amount": 30 } },
+    "battery_unit":   { "name": "Battery Unit",   "weight": 1.2, "volume": 0.8, "price": 15,  "size": "large", "color": [0.3, 0.7, 1.0], "use": { "restore": "energy", "amount": 35 } },
+    "alloy_plate":    { "name": "Alloy Plate",    "weight": 2.5, "volume": 1.2, "price": 22,  "size": "large", "color": [0.8, 0.8, 0.82], "use": { "restore": "hull", "amount": 20 } },
+    "titanium_plate": { "name": "Titanium Plate", "weight": 2.0, "volume": 1.0, "price": 35,  "size": "large", "color": [0.85, 0.92, 1.0], "use": { "restore": "hull", "amount": 30 } },
+    "circuit_board":  { "name": "Circuit Board",  "weight": 0.3, "volume": 0.3, "price": 50,  "size": "small", "color": [0.2, 1.0, 0.75] },
+    "data_core":      { "name": "Data Core",      "weight": 0.2, "volume": 0.2, "price": 120, "size": "large", "color": [1.0, 0.95, 0.4] }
+  },
+
+  "loot": {
+    "asteroid_iron":          [ { "item": "iron", "min": 2, "max": 5, "chance": 1.0 }, { "item": "titanium", "min": 1, "max": 1, "chance": 0.2 } ],
+    "asteroid_titanium":      [ { "item": "titanium", "min": 2, "max": 4, "chance": 1.0 }, { "item": "iron", "min": 1, "max": 2, "chance": 0.5 } ],
+    "asteroid_rare":          [ { "item": "rare_ore", "min": 1, "max": 3, "chance": 1.0 }, { "item": "titanium", "min": 1, "max": 2, "chance": 0.5 } ],
+    "asteroid_ice":           [ { "item": "ice", "min": 3, "max": 6, "chance": 1.0 } ],
+    "derelict_satellite":     [ { "item": "electronics", "min": 1, "max": 3, "chance": 1.0 }, { "item": "scrap_alloy", "min": 1, "max": 3, "chance": 1.0 }, { "item": "battery_unit", "min": 1, "max": 1, "chance": 0.5 } ],
+    "derelict_vessel":        [ { "item": "fuel_cell", "min": 1, "max": 3, "chance": 1.0 }, { "item": "scrap_alloy", "min": 3, "max": 6, "chance": 1.0 }, { "item": "electronics", "min": 1, "max": 3, "chance": 0.7 }, { "item": "battery_unit", "min": 1, "max": 2, "chance": 0.5 } ],
+    "derelict_station_wreck": [ { "item": "scrap_alloy", "min": 6, "max": 12, "chance": 1.0 }, { "item": "fuel_cell", "min": 2, "max": 4, "chance": 1.0 }, { "item": "battery_unit", "min": 2, "max": 3, "chance": 1.0 }, { "item": "electronics", "min": 2, "max": 5, "chance": 1.0 }, { "item": "titanium", "min": 2, "max": 4, "chance": 0.5 } ],
+    "derelict_ghost_ship":    [ { "item": "data_core", "min": 1, "max": 2, "chance": 1.0 }, { "item": "fuel_cell", "min": 3, "max": 5, "chance": 1.0 }, { "item": "electronics", "min": 3, "max": 6, "chance": 1.0 }, { "item": "rare_ore", "min": 2, "max": 4, "chance": 1.0 } ],
+    "scrap_cluster":          [ { "item": "scrap_alloy", "min": 1, "max": 2, "chance": 1.0 }, { "item": "electronics", "min": 1, "max": 1, "chance": 0.15 } ],
+    "signal_cache":           [ { "item": "fuel_cell", "min": 1, "max": 3, "chance": 0.8 }, { "item": "circuit_board", "min": 1, "max": 2, "chance": 0.4 }, { "item": "data_core", "min": 1, "max": 1, "chance": 0.25 } ],
+    "rescue_reward":          [ { "item": "fuel_cell", "min": 2, "max": 3, "chance": 1.0 }, { "item": "battery_unit", "min": 2, "max": 3, "chance": 1.0 } ]
+  },
+
+  "recipes": {
+    "alloy_plate":       { "name": "Alloy Plate",       "inputs": { "iron": 3, "scrap_alloy": 1 },   "outputs": { "alloy_plate": 1 },    "module": "refinery", "starting": true },
+    "titanium_plate":    { "name": "Titanium Plate",    "inputs": { "titanium": 3 },                 "outputs": { "titanium_plate": 1 }, "module": "refinery", "starting": true },
+    "fuel_from_ice":     { "name": "Fuel Cell from Ice","inputs": { "ice": 4 },                      "outputs": { "fuel_cell": 1 },      "module": "refinery", "starting": false },
+    "battery_assembly":  { "name": "Battery Unit",      "inputs": { "titanium": 1, "electronics": 2 },"outputs": { "battery_unit": 1 },  "module": "refinery", "starting": false },
+    "circuit_board":     { "name": "Circuit Board",     "inputs": { "electronics": 3, "rare_ore": 1 },"outputs": { "circuit_board": 1 }, "module": "refinery", "starting": false }
+  },
+
+  "modules": {
+    "lab":            { "name": "Research Lab",      "description": "Required to run research. Draws energy while researching.", "research_energy_per_sec": 0.4, "energy_per_sec": 0, "starting": true, "effects": [] },
+    "refinery":       { "name": "Refinery",          "description": "Enables crafting recipes.", "energy_per_sec": 0, "starting": true, "effects": [] },
+    "solar_scoop":    { "name": "Solar Scoop",       "description": "Harvests energy near stars.", "energy_per_sec": 0, "starting": false, "effects": [ { "stat": "scoop_rate", "op": "add", "value": 5 } ] },
+    "fuel_converter": { "name": "Fuel Converter",    "description": "Converts fuel into energy when the battery is low.", "energy_per_sec": 0, "starting": false, "effects": [ { "stat": "converter_rate", "op": "add", "value": 1.5 } ] },
+    "drone_bay":      { "name": "Drone Bay",         "description": "Launch collector drones (G).", "energy_per_sec": 0, "starting": false, "effects": [ { "stat": "drone_count", "op": "add", "value": 2 } ] },
+    "deep_scanner":   { "name": "Deep Scanner",      "description": "Longer scan and radar range.", "energy_per_sec": 0.2, "starting": false, "effects": [ { "stat": "scan_range", "op": "mul", "value": 1.6 }, { "stat": "radar_range", "op": "mul", "value": 1.3 } ] },
+    "aux_fuel_tank":  { "name": "Auxiliary Fuel Tank","description": "Extra fuel capacity.", "energy_per_sec": 0, "starting": false, "effects": [ { "stat": "fuel_capacity", "op": "add", "value": 60 } ] },
+    "cargo_expander": { "name": "Cargo Expander",    "description": "Extra cargo weight and volume.", "energy_per_sec": 0, "starting": false, "effects": [ { "stat": "cargo_max_volume", "op": "add", "value": 80 }, { "stat": "cargo_max_weight", "op": "add", "value": 100 } ] },
+    "shield_booster": { "name": "Shield Booster",    "description": "Stronger shields.", "energy_per_sec": 0.3, "starting": false, "effects": [ { "stat": "shield_max", "op": "add", "value": 50 } ] },
+    "heat_shield":    { "name": "Heat Shield",       "description": "Resists stellar heat.", "energy_per_sec": 0, "starting": false, "effects": [ { "stat": "heat_resistance", "op": "add", "value": 0.5 } ] }
+  },
+  "starting_modules": ["lab", "refinery"],
+
+  "start": {
+    "cargo": { "fuel_cell": 2, "battery_unit": 2, "scrap_alloy": 10, "iron": 6, "electronics": 2 }
+  },
+
+  "station": {
+    "sell_multiplier": 1.0,
+    "buy_multiplier": 1.6,
+    "buy_items": ["fuel_cell", "battery_unit", "scrap_alloy", "electronics", "alloy_plate"],
+    "fuel_price_per_unit": 1.5,
+    "energy_price_per_unit": 0.8,
+    "repair_price_per_point": 2.5,
+    "data_price_per_point": 1.0
+  },
+
+  "difficulty": {
+    "relaxed":  { "name": "Relaxed",  "description": "Half damage, low consumption, reload on destruction.", "consumption_multiplier": 0.6,  "damage_multiplier": 0.5,  "permadeath": false, "start_credits": 400 },
+    "standard": { "name": "Standard", "description": "The intended experience. Reload last save on destruction.", "consumption_multiplier": 1.0,  "damage_multiplier": 1.0,  "permadeath": false, "start_credits": 150 },
+    "ironman":  { "name": "Ironman",  "description": "Permadeath. One autosave slot, deleted when the ship is destroyed.", "consumption_multiplier": 1.15, "damage_multiplier": 1.25, "permadeath": true,  "start_credits": 0 }
+  },
+
+  "autosave": { "interval_sec": 120, "min_hull_fraction": 0.3, "quiet_time_sec": 5 },
+
+  "camera": {
+    "zoom_min": 0.12,
+    "zoom_max": 2.5,
+    "zoom_default": 0.8,
+    "zoom_step": 1.15,
+    "zoom_smooth": 8.0,
+    "follow_smooth": 5.0,
+    "lookahead_factor": 0.35,
+    "lookahead_max": 420,
+    "photo_pan_speed": 900
+  },
+
+  "achievements": [
+    { "id": "first_steps",   "name": "First Steps",      "description": "Travel 10,000 units.",           "stat": "distance_traveled",  "threshold": 10000 },
+    { "id": "long_haul",     "name": "Long Haul",        "description": "Travel 1,000,000 units.",        "stat": "distance_traveled",  "threshold": 1000000 },
+    { "id": "explorer",      "name": "Explorer",         "description": "Discover 5 star systems.",       "stat": "systems_discovered", "threshold": 5 },
+    { "id": "cartographer",  "name": "Cartographer",     "description": "Discover 50 objects.",           "stat": "discoveries",        "threshold": 50 },
+    { "id": "miner",         "name": "Rock Breaker",     "description": "Mine 25 asteroids.",             "stat": "asteroids_mined",    "threshold": 25 },
+    { "id": "salvager",      "name": "Salvager",         "description": "Salvage 10 derelicts.",          "stat": "derelicts_salvaged", "threshold": 10 },
+    { "id": "deep_space",    "name": "Deep Space",       "description": "Reach 250,000 units from origin.","stat": "max_distance",      "threshold": 250000 },
+    { "id": "researcher",    "name": "Researcher",       "description": "Complete 10 technologies.",      "stat": "techs_researched",   "threshold": 10 },
+    { "id": "trader",        "name": "Trader",           "description": "Earn 5,000 credits.",            "stat": "credits_earned",     "threshold": 5000 },
+    { "id": "wormhole",      "name": "Through the Fold", "description": "Use a wormhole.",                "stat": "wormholes_used",     "threshold": 1 },
+    { "id": "rescuer",       "name": "Good Samaritan",   "description": "Complete 3 rescue missions.",    "stat": "rescues",            "threshold": 3 },
+    { "id": "namer",         "name": "Astronomer",       "description": "Name 10 celestial bodies.",      "stat": "bodies_named",       "threshold": 10 }
+  ],
+
+  "naming": {
+    "catalogues": ["HD", "HIP", "Gliese", "GJ", "Kepler", "TOI", "WASP", "LHS", "Ross", "Wolf", "LTT", "TYC"],
+    "catalogue_number": [10, 99999],
+    "greek": ["Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta", "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho", "Sigma", "Tau", "Upsilon", "Phi", "Chi", "Psi", "Omega"],
+    "constellations": ["Andromedae", "Aquarii", "Aquilae", "Arietis", "Aurigae", "Bootis", "Cancri", "Canis Majoris", "Capricorni", "Carinae", "Cassiopeiae", "Centauri", "Cephei", "Ceti", "Columbae", "Coronae Borealis", "Corvi", "Crucis", "Cygni", "Draconis", "Eridani", "Geminorum", "Herculis", "Hydrae", "Leonis", "Leporis", "Librae", "Lyrae", "Orionis", "Pavonis", "Pegasi", "Persei", "Phoenicis", "Piscium", "Sagittarii", "Scorpii", "Tauri", "Ursae Majoris", "Velorum", "Virginis"],
+    "style_weights": { "catalogue": 0.5, "bayer": 0.3, "flamsteed": 0.2 },
+    "planet_letters": "bcdefghijk",
+    "station_prefixes": ["Outpost", "Relay", "Depot", "Haven", "Waystation", "Anchor", "Harbor"],
+    "field_prefix": "AF"
+  },
+
+  "lore": {
+    "ship_prefixes": ["ISV", "MSV", "RSV", "CSS", "UNS", "TSV"],
+    "ship_names": ["Meridian", "Long Patience", "Halcyon", "Kestrel", "Odyssey Drift", "Pale Lantern", "Iron Psalm", "Morning Ledger", "Quiet Harvest", "Saint Brendan", "Far Tally", "Copper Wren"],
+    "crew": ["Captain Ilsa Moreau", "Engineer Tomas Reyes", "Navigator Priya Anand", "Chief Okonkwo", "Dr. Hana Sato", "Pilot Bram Kessler", "Quartermaster Lu Wen"],
+    "systems": ["reactor", "life support", "navigation array", "jump drive", "cargo clamps", "comms mast", "coolant loop"],
+    "templates": [
+      "Day {day}. {crew} reports the {system} is failing. We are drifting and rationing power.",
+      "Day {day}. Picked up a signal we cannot decode. {crew} wants to follow it. I said no.",
+      "Day {day}. Micrometeor storm. Hull breach near the {system}. Sealed it, lost two cargo pods.",
+      "Day {day}. The {system} finally gave out. {crew} is recording this in case anyone finds us.",
+      "Day {day}. Rich ore field on the scopes. If the {system} holds, this run pays for itself.",
+      "Day {day}. {crew} swears the stars moved. Logged it. Probably fatigue.",
+      "Day {day}. Abandoning ship. Escape pods away. Coordinates of the cache are in the {system} buffer."
+    ]
+  },
+
+  "input_bindings": {
+    "thrust":          ["W", "Up", "JoyAxis:5+"],
+    "retro":           ["S", "Down", "JoyAxis:4+"],
+    "rotate_left":     ["A", "Left", "JoyAxis:0-"],
+    "rotate_right":    ["D", "Right", "JoyAxis:0+"],
+    "strafe_left":     ["Q", "JoyButton:9"],
+    "strafe_right":    ["E", "JoyButton:10"],
+    "warp":            ["Shift", "JoyButton:7"],
+    "laser":           ["Space", "JoyButton:0"],
+    "tractor":         ["F", "JoyButton:2"],
+    "scan":            ["V", "JoyButton:3"],
+    "drones":          ["G"],
+    "interact":        ["X", "Enter", "JoyButton:1"],
+    "set_waypoint":    ["MouseLeft"],
+    "clear_waypoint":  ["MouseRight"],
+    "accept_suggestion": ["T"],
+    "refuel":          ["R"],
+    "recharge":        ["N"],
+    "repair":          ["H"],
+    "zoom_in":         ["WheelUp", "Equal", "JoyButton:11"],
+    "zoom_out":        ["WheelDown", "Minus", "JoyButton:12"],
+    "map":             ["Tab"],
+    "codex":           ["C"],
+    "tech":            ["K"],
+    "cargo":           ["I"],
+    "modules":         ["U"],
+    "stats":           ["O"],
+    "help":            ["F1"],
+    "photo_mode":      ["P"],
+    "pause":           ["Escape", "JoyButton:6"],
+    "quicksave":       ["F5"],
+    "quickload":       ["F9"],
+    "reload_config":   ["F6"]
+  },
+
+  "palette": {
+    "normal":     { "fuel": [1.0, 0.62, 0.15], "energy": [0.3, 0.75, 1.0], "shield": [0.45, 0.9, 1.0], "hull": [0.4, 0.95, 0.45], "warning": [1.0, 0.75, 0.2], "danger": [1.0, 0.3, 0.25], "accent": [0.45, 0.85, 1.0], "good": [0.4, 0.95, 0.5], "text": [0.88, 0.92, 1.0] },
+    "colorblind": { "fuel": [0.9, 0.6, 0.0],  "energy": [0.0, 0.45, 0.7], "shield": [0.35, 0.7, 0.9], "hull": [0.95, 0.9, 0.25], "warning": [0.9, 0.6, 0.0],  "danger": [0.8, 0.4, 0.0],   "accent": [0.35, 0.7, 0.9], "good": [0.0, 0.6, 0.5],  "text": [0.95, 0.95, 0.95] }
+  },
+
+  "radar_colors": {
+    "star": [1.0, 0.85, 0.4], "planet": [0.5, 0.75, 1.0], "moon": [0.7, 0.7, 0.75], "asteroid": [0.6, 0.55, 0.5], "comet": [0.7, 0.95, 1.0],
+    "derelict": [0.85, 0.6, 0.35], "pickup": [0.9, 0.9, 0.5], "station": [0.4, 1.0, 0.6], "nebula": [0.75, 0.45, 1.0], "ion_storm": [0.5, 0.6, 1.0],
+    "black_hole": [1.0, 0.3, 0.6], "wormhole": [0.9, 0.5, 1.0], "signal": [1.0, 1.0, 0.6], "rescue_pod": [1.0, 0.45, 0.4], "field": [0.6, 0.55, 0.5]
+  }
+}
