@@ -1,5 +1,10 @@
 ; Engine configuration file.
-; Gameplay tuning lives in config/game_config.json and config/tech_tree.json.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
 
 config_version=5
 
